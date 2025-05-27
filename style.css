@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 5px solid #2e7d32;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
+header a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.produkty {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .produkty {
+    grid-template-columns: 1fr;
+  }
+}
+
+.produkt {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.produkt:hover {
+  transform: scale(1.05);
+}
+
+.produkt img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.produkt h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.produkt p {
+  font-weight: 700;
+  color: #4caf50;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.objednat-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.objednat-btn:hover {
+  background: linear-gradient(135deg, #388e3c, #2e7d32);
+}

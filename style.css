@@ -2,42 +2,53 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #cce5ff, #e6f7ff);
+  background: linear-gradient(135deg, #d0f0ff, #f0fff5);
   color: #333;
 }
 
 header {
   text-align: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header a {
   color: #0077cc;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .produkty {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .produkt {
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 15px;
-  width: 200px;
   text-align: center;
+  transition: transform 0.2s;
+}
+
+.produkt:hover {
+  transform: scale(1.03);
 }
 
 .produkt img {
   width: 100%;
   height: auto;
   border-radius: 8px;
+}
+
+.produkt h3 {
+  margin: 10px 0 5px;
 }
 
 .objednat-btn {

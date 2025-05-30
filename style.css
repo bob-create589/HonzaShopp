@@ -1,27 +1,31 @@
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #d0f0ff, #f0fff5);
+  background: linear-gradient(to bottom right, #f0f9ff, #d0f0e0);
   color: #333;
 }
 
 header {
   text-align: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 40px 20px;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
 }
 
-header a {
-  color: #0077cc;
-  text-decoration: none;
+header h1 {
+  margin: 0 0 10px;
+  font-size: 2.5em;
+}
+
+header p a {
+  color: #ffeb3b;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .produkty {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
   padding: 30px;
   max-width: 1200px;
@@ -29,39 +33,45 @@ header a {
 }
 
 .produkt {
-  background-color: white;
+  background: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 15px;
+  padding: 20px;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .produkt:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
 }
 
 .produkt img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .produkt h3 {
   margin: 10px 0 5px;
 }
 
+.produkt p {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .objednat-btn {
   display: inline-block;
   margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #28a745;
+  padding: 10px 15px;
+  background: linear-gradient(to right, #4caf50, #81c784);
   color: white;
+  border-radius: 8px;
   text-decoration: none;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s;
 }
 
 .objednat-btn:hover {
-  background-color: #1e7e34;
+  background: linear-gradient(to right, #388e3c, #66bb6a);
 }

@@ -6,20 +6,75 @@
 <title>3D Tisk – Obchod</title>
 <style>
   body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; margin: 0; padding: 20px; }
-  .produkty { display: flex; flex-wrap: wrap; gap: 20px; }
-  .produkt { background: #1e2a38; border-radius: 10px; padding: 15px; width: 220px; text-align: center; }
-  .produkt img { width: 100%; border-radius: 10px; }
-  button { background: #3c9d9b; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-  button:hover { background: #29908c; }
-  #formular { display: none; margin-top: 30px; background: #12303a; padding: 20px; border-radius: 10px; max-width: 400px; }
-  label, input { display: block; width: 100%; margin-bottom: 15px; }
-  input { padding: 8px; border-radius: 5px; border: none; }
-  #status { margin-top: 15px; }
+  h1 { text-align: center; margin-bottom: 30px; }
+  .produkty {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .produkt {
+    background: #1e2a38;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  .produkt img {
+    width: 100%;
+    border-radius: 10px;
+    height: 130px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  button {
+    background: #3c9d9b;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  button:hover {
+    background: #29908c;
+  }
+  #formular {
+    display: none;
+    max-width: 400px;
+    background: #12303a;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px auto 0 auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  }
+  #formular h2 {
+    margin-top: 0;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+  input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  #status {
+    margin-top: 10px;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body>
 
 <h1>🛒 Obchod s 3D Tiskem</h1>
+
 <div class="produkty">
   <div class="produkt" data-name="Píšťalka" data-price="10 Kč">
     <img src="obrazky/pistalka.jpg" alt="Píšťalka" />
@@ -39,10 +94,40 @@
     <p>50 Kč</p>
     <button class="btn-podivat">Podívat Se</button>
   </div>
+  <div class="produkt" data-name="Axolotl" data-price="70 Kč">
+    <img src="obrazky/axolotl.jpg" alt="Axolotl" />
+    <h3>Axolotl</h3>
+    <p>70 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
+  <div class="produkt" data-name="Žába" data-price="60 Kč">
+    <img src="obrazky/zaba.jpg" alt="Žába" />
+    <h3>Žába</h3>
+    <p>60 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
+  <div class="produkt" data-name="Chobotnička" data-price="30 Kč">
+    <img src="obrazky/chobotnicka.jpg" alt="Chobotnička" />
+    <h3>Chobotnička</h3>
+    <p>30 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
+  <div class="produkt" data-name="Držák Na Klíče" data-price="35 Kč">
+    <img src="obrazky/drzak-na-klice.jpg" alt="Držák Na Klíče" />
+    <h3>Držák Na Klíče</h3>
+    <p>35 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
   <div class="produkt" data-name="Stojánek na mobil" data-price="65 Kč">
-    <img src="obrazky/stanek.jpg" alt="Stojánek na mobil" />
+    <img src="obrazky/stanek-na-mobil.jpg" alt="Stojánek na mobil" />
     <h3>Stojánek na mobil</h3>
     <p>65 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
+  <div class="produkt" data-name="Stojánek na ovladač" data-price="75 Kč">
+    <img src="obrazky/stanek-na-ovladac.jpg" alt="Stojánek na ovladač" />
+    <h3>Stojánek na ovladač</h3>
+    <p>75 Kč</p>
     <button class="btn-podivat">Podívat Se</button>
   </div>
 </div>
@@ -68,59 +153,61 @@
   const objednavkaForm = document.getElementById('objednavka-form');
   const statusDiv = document.getElementById('status');
 
-  // Sem vlož svůj Discord webhook URL (pozor na bezpečnost, ideálně na backend)
-  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1391394083318140999/-e5g8PGZx62-k1CnJtA-rrMRhanv_gULoJvtWRYI7tFcD2lJdiAPH-NvDuYsbSCedQ0Q';
-
   let vybranyProdukt = null;
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const produktDiv = btn.closest('.produkt');
+      const produkt = btn.closest('.produkt');
       vybranyProdukt = {
-        name: produktDiv.dataset.name,
-        price: produktDiv.dataset.price
+        name: produkt.getAttribute('data-name'),
+        price: produkt.getAttribute('data-price'),
       };
       produktNazevSpan.textContent = vybranyProdukt.name + " (" + vybranyProdukt.price + ")";
       formular.style.display = 'block';
       statusDiv.textContent = '';
-      objednavkaForm.style.display = 'block';
+      window.scrollTo({ top: formular.offsetTop, behavior: 'smooth' });
     });
   });
 
-  objednavkaForm.addEventListener('submit', e => {
+  objednavkaForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const jmeno = document.getElementById('jmeno').value.trim();
     const barva = document.getElementById('barva').value.trim();
 
-    if (!jmeno || !barva) {
-      alert('Vyplň prosím jméno i barvu.');
+    if(!jmeno || !barva) {
+      statusDiv.textContent = 'Vyplňte prosím jméno i barvu.';
       return;
     }
 
+    statusDiv.textContent = 'Odesílám objednávku...';
+
+    // Poslat webhook na Discord
+    const webhookUrl = 'https://discord.com/api/webhooks/1391394083318140999/-e5g8PGZx62-k1CnJtA-rrMRhanv_gULoJvtWRYI7tFcD2lJdiAPH-NvDuYsbSCedQ0Q';
+
     const message = {
-      content: `**Nová objednávka:**\nProdukt: ${vybranyProdukt.name} (${vybranyProdukt.price})\nJméno: ${jmeno}\nBarva: ${barva}`
+      content: `**Nová objednávka!**\nProdukt: ${vybranyProdukt.name} (${vybranyProdukt.price})\nJméno: ${jmeno}\nBarva: ${barva}`
     };
 
-    fetch(DISCORD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(message)
-    })
-    .then(response => {
-      if (response.ok) {
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(message),
+      });
+      if(response.ok) {
         statusDiv.style.color = 'lightgreen';
-        statusDiv.textContent = 'Objednávka byla odeslána!';
+        statusDiv.textContent = 'Objednávka odeslána! Děkujeme.';
         objednavkaForm.reset();
-        objednavkaForm.style.display = 'none';
+        formular.style.display = 'none';
       } else {
-        throw new Error('Chyba při odesílání objednávky.');
+        throw new Error('Chyba serveru');
       }
-    })
-    .catch(error => {
+    } catch(err) {
       statusDiv.style.color = 'red';
-      statusDiv.textContent = 'Nepodařilo se odeslat objednávku. Zkus to prosím později.';
-      console.error(error);
-    });
+      statusDiv.textContent = 'Chyba při odesílání objednávky.';
+      console.error(err);
+    }
   });
 </script>
 

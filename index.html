@@ -81,49 +81,6 @@
     <a href="mailto:honza.hejny@email.cz?subject=Objednávka%20Stojánek%20na%20ovladač" class="objednat-btn">Objednat</a>
   </div>
 </section>
-  <script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const characters = "アカサタナハマヤラワアイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const chars = characters.split("");
-
-  const fontSize = 16;
-  const columns = Math.floor(canvas.width / fontSize);
-  const drops = new Array(columns).fill(1);
-
-  function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#0F0";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-      const char = chars[Math.floor(Math.random() * chars.length)];
-      const x = i * fontSize;
-      const y = drops[i] * fontSize;
-
-      ctx.fillText(char, x, y);
-
-      if (y > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(drawMatrix, 30);
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
 
 
 </body>

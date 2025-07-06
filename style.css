@@ -76,17 +76,3 @@ header p a {
   background: linear-gradient(to right, #388e3c, #66bb6a);
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-}
-
-canvas#matrixCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: block;
-}

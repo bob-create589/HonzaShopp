@@ -1,68 +1,128 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>3D Tisk – Obchod</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Tisk – Obchod</title>
+<style>
+  body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; margin: 0; padding: 20px; }
+  .produkty { display: flex; flex-wrap: wrap; gap: 20px; }
+  .produkt { background: #1e2a38; border-radius: 10px; padding: 15px; width: 220px; text-align: center; }
+  .produkt img { width: 100%; border-radius: 10px; }
+  button { background: #3c9d9b; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+  button:hover { background: #29908c; }
+  #formular { display: none; margin-top: 30px; background: #12303a; padding: 20px; border-radius: 10px; max-width: 400px; }
+  label, input { display: block; width: 100%; margin-bottom: 15px; }
+  input { padding: 8px; border-radius: 5px; border: none; }
+  #status { margin-top: 15px; }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>🛒 Obchod s 3D Tiskem</h1>
-  <p>Vyber si produkt a objednej přes WhatsApp</p>
-</header>
-
-<section class="produkty">
-  <div class="produkt">
+<h1>🛒 Obchod s 3D Tiskem</h1>
+<div class="produkty">
+  <div class="produkt" data-name="Píšťalka" data-price="10 Kč">
     <img src="obrazky/pistalka.jpg" alt="Píšťalka" />
     <h3>Píšťalka</h3>
     <p>10 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20P%C3%AD%C5%A1talka" target="_blank" class="objednat-btn">Objednat</a>
+    <button class="btn-podivat">Podívat Se</button>
   </div>
-
-  <div class="produkt">
+  <div class="produkt" data-name="Lego Kostka" data-price="20 Kč">
     <img src="obrazky/lego.jpg" alt="Lego Kostka" />
     <h3>Lego Kostka</h3>
     <p>20 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20Lego%20Kostka" target="_blank" class="objednat-btn">Objednat</a>
+    <button class="btn-podivat">Podívat Se</button>
   </div>
-
-  <div class="produkt">
+  <div class="produkt" data-name="Raptor" data-price="50 Kč">
     <img src="obrazky/raptor.jpg" alt="Raptor" />
     <h3>Raptor</h3>
     <p>50 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20Raptor" target="_blank" class="objednat-btn">Objednat</a>
+    <button class="btn-podivat">Podívat Se</button>
   </div>
+  <div class="produkt" data-name="Stojánek na mobil" data-price="65 Kč">
+    <img src="obrazky/stanek.jpg" alt="Stojánek na mobil" />
+    <h3>Stojánek na mobil</h3>
+    <p>65 Kč</p>
+    <button class="btn-podivat">Podívat Se</button>
+  </div>
+</div>
 
-  <div class="produkt">
-    <img src="obrazky/axolotl.jpg" alt="Axolotl" />
-    <h3>Axolotl</h3>
-    <p>70 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20Axolotl" target="_blank" class="objednat-btn">Objednat</a>
-  </div>
+<div id="formular">
+  <h2>Objednávka produktu: <span id="produkt-nazev"></span></h2>
+  <form id="objednavka-form">
+    <label for="jmeno">Vaše jméno:</label>
+    <input type="text" id="jmeno" name="jmeno" required />
 
-  <div class="produkt">
-    <img src="obrazky/zaba.jpg" alt="Žába" />
-    <h3>Žába</h3>
-    <p>60 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20%C5%BD%C3%A1ba" target="_blank" class="objednat-btn">Objednat</a>
-  </div>
+    <label for="barva">Barva:</label>
+    <input type="text" id="barva" name="barva" placeholder="např. červená" required />
 
-  <div class="produkt">
-    <img src="obrazky/chobotnicka.jpg" alt="Chobotnička" />
-    <h3>Chobotnička</h3>
-    <p>30 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20Chobotni%C4%8Dka" target="_blank" class="objednat-btn">Objednat</a>
-  </div>
+    <button type="submit">Objednat</button>
+  </form>
+  <div id="status"></div>
+</div>
 
-  <div class="produkt">
-    <img src="obrazky/stojanek-ovladac.jpg" alt="Stojánek na ovladač" />
-    <h3>Stojánek na ovladač</h3>
-    <p>75 Kč</p>
-    <a href="https://wa.me/420773695297?text=Objednávka%20Stoj%C3%A1nek%20na%20ovlada%C4%8D" target="_blank" class="objednat-btn">Objednat</a>
-  </div>
-</section>
+<script>
+  const btns = document.querySelectorAll('.btn-podivat');
+  const formular = document.getElementById('formular');
+  const produktNazevSpan = document.getElementById('produkt-nazev');
+  const objednavkaForm = document.getElementById('objednavka-form');
+  const statusDiv = document.getElementById('status');
+
+  // Sem vlož svůj Discord webhook URL (pozor na bezpečnost, ideálně na backend)
+  const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/TWUJ_WEBHOOK_ID/TWUJ_WEBHOOK_TOKEN';
+
+  let vybranyProdukt = null;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const produktDiv = btn.closest('.produkt');
+      vybranyProdukt = {
+        name: produktDiv.dataset.name,
+        price: produktDiv.dataset.price
+      };
+      produktNazevSpan.textContent = vybranyProdukt.name + " (" + vybranyProdukt.price + ")";
+      formular.style.display = 'block';
+      statusDiv.textContent = '';
+      objednavkaForm.style.display = 'block';
+    });
+  });
+
+  objednavkaForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const jmeno = document.getElementById('jmeno').value.trim();
+    const barva = document.getElementById('barva').value.trim();
+
+    if (!jmeno || !barva) {
+      alert('Vyplň prosím jméno i barvu.');
+      return;
+    }
+
+    const message = {
+      content: `**Nová objednávka:**\nProdukt: ${vybranyProdukt.name} (${vybranyProdukt.price})\nJméno: ${jmeno}\nBarva: ${barva}`
+    };
+
+    fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(message)
+    })
+    .then(response => {
+      if (response.ok) {
+        statusDiv.style.color = 'lightgreen';
+        statusDiv.textContent = 'Objednávka byla odeslána!';
+        objednavkaForm.reset();
+        objednavkaForm.style.display = 'none';
+      } else {
+        throw new Error('Chyba při odesílání objednávky.');
+      }
+    })
+    .catch(error => {
+      statusDiv.style.color = 'red';
+      statusDiv.textContent = 'Nepodařilo se odeslat objednávku. Zkus to prosím později.';
+      console.error(error);
+    });
+  });
+</script>
 
 </body>
 </html>
